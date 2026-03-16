@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TherapyMantra — B2C Revenue Brief</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root {
+  --bg:      #f6f4f0;
+  --white:   #ffffff;
+  --s2:      #f0ede8;
+  --bd:      #e4e0d8;
+  --bd2:     #cbc6bc;
+  --text:    #1a1916;
+  --t2:      #605c54;
+  --t3:      #a8a49c;
+  --green:   #1e6840;
+  --gbg:     #edf6f1;
+  --gbd:     #b4d9c4;
+  --red:     #b02a2a;
+  --rbg:     #fdf0f0;
+  --rbd:     #e8b8b8;
+  --amber:   #8f5000;
+  --abg:     #fdf4e7;
+  --abd:     #edcc94;
+  --blue:    #1840a0;
+  --bbg:     #edf1fc;
+  --bbd:     #b4c4ec;
+  --serif: 'Lora', serif;
+  --sans:  'DM Sans', sans-serif;
+  --mono:  'DM Mono', monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:13px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1160px;margin:0 auto;padding:0 36px 80px}
+
+/* HEADER */
+.hdr{padding:48px 0 40px;display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid var(--bd);margin-bottom:40px}
+.eyebrow{font-family:var(--mono);font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:'';width:20px;height:1px;background:var(--bd2)}
+h1{font-family:var(--serif);font-size:38px;font-weight:400;line-height:1.1;letter-spacing:-.3px;margin-bottom:8px}
+h1 em{font-style:italic;color:var(--green)}
+.hdr-sub{font-size:12px;color:var(--t2);font-weight:300}
+.hdr-r{text-align:right}
+.hdr-date{font-family:var(--mono);font-size:11px;color:var(--t3);margin-bottom:8px}
+.live{display:inline-flex;align-items:center;gap:7px;background:var(--gbg);border:1px solid var(--gbd);border-radius:100px;padding:4px 12px;font-size:11px;color:var(--green);font-weight:500}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 2s ease infinite}
+
+/* KPIs */
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:36px}
+.kpi{background:var(--white);border:1px solid var(--bd);border-top:3px solid var(--bd2);border-radius:12px;padding:20px 18px 16px;transition:box-shadow .2s}
+.kpi:hover{box-shadow:0 2px 14px rgba(0,0,0,.07)}
+.kpi.gn{border-top-color:var(--green)}
+.kpi.rd{border-top-color:var(--red)}
+.kpi.am{border-top-color:var(--amber)}
+.kpi.bl{border-top-color:var(--blue)}
+.kpi-l{font-family:var(--mono);font-size:9.5px;color:var(--t3);text-transform:uppercase;letter-spacing:.09em;margin-bottom:11px}
+.kpi-v{font-family:var(--serif);font-size:28px;color:var(--text);line-height:1;margin-bottom:6px;letter-spacing:-.3px}
+.kpi-s{font-size:11px;color:var(--t2);font-weight:300}
+.kpi-s.dn{color:var(--red)}.kpi-s.up{color:var(--green)}
+
+/* SECTIONS */
+.sec{margin-bottom:30px}
+.sec-hd{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
+.sec-title{font-family:var(--serif);font-size:20px;font-weight:400;color:var(--text)}
+.sec-note{font-size:11px;color:var(--t3);font-weight:300}
+
+/* CARDS */
+.card{background:var(--white);border:1px solid var(--bd);border-radius:16px;padding:24px}
+.ct{font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px}
+.cs{font-size:11px;color:var(--t3);margin-bottom:16px;font-weight:300}
+
+/* BADGE */
+.bdn{display:inline-block;font-family:var(--mono);font-size:10px;padding:2px 8px;border-radius:100px;margin-left:5px;vertical-align:middle;background:var(--rbg);color:var(--red);border:1px solid var(--rbd)}
+.bup{display:inline-block;font-family:var(--mono);font-size:10px;padding:2px 8px;border-radius:100px;margin-left:5px;vertical-align:middle;background:var(--gbg);color:var(--green);border:1px solid var(--gbd)}
+.bnote{display:inline-block;font-family:var(--mono);font-size:10px;padding:2px 8px;border-radius:100px;margin-left:5px;vertical-align:middle;background:var(--s2);color:var(--t2);border:1px solid var(--bd)}
+
+/* GRIDS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.g6535{display:grid;grid-template-columns:1.75fr 1fr;gap:14px}
+
+/* LEGEND */
+.leg{display:flex;gap:16px;margin-bottom:14px;font-size:11px;color:var(--t2);flex-wrap:wrap}
+.li{display:flex;align-items:center;gap:5px}
+.ld{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+
+/* FUNNEL */
+.frow{margin-bottom:9px}
+.fmeta{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+.fn{font-size:12px;color:var(--t2)}
+.fv{font-family:var(--mono);font-size:11px;font-weight:500}
+.ftrk{height:24px;background:var(--s2);border-radius:6px;overflow:hidden}
+.ffil{height:100%;border-radius:5px;display:flex;align-items:center;padding-left:10px;font-size:10px;font-weight:500}
+.fdiv{height:1px;background:var(--bd);margin:13px 0 11px}
+.fsub{font-family:var(--mono);font-size:10px;color:var(--t3);margin-bottom:10px}
+.fnote{font-size:11px;color:var(--t2);line-height:1.65;margin-top:14px;padding-top:14px;border-top:1px solid var(--bd);font-weight:300}
+.fnote strong{color:var(--red);font-weight:500}
+
+/* STAT ROWS */
+.srow{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--bd);font-size:12px}
+.srow:last-child{border-bottom:none}
+.sl{color:var(--t2);font-weight:300}
+.sv{font-family:var(--mono);font-weight:500}
+.sv.g{color:var(--green)}.sv.r{color:var(--red)}.sv.a{color:var(--amber)}
+.snote{font-size:11px;color:var(--t3);margin-top:10px;line-height:1.6;font-weight:300}
+
+/* INSIGHT CARDS */
+.icard{background:var(--white);border:1px solid var(--bd);border-radius:16px;padding:22px;transition:box-shadow .2s}
+.icard:hover{box-shadow:0 2px 14px rgba(0,0,0,.07)}
+.itag{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;padding:3px 10px;border-radius:100px;font-weight:500;margin-bottom:14px}
+.itag.r{background:var(--rbg);color:var(--red);border:1px solid var(--rbd)}
+.itag.a{background:var(--abg);color:var(--amber);border:1px solid var(--abd)}
+.itag.g{background:var(--gbg);color:var(--green);border:1px solid var(--gbd)}
+.inum{font-family:var(--serif);font-size:38px;line-height:1;margin-bottom:9px;letter-spacing:-1px}
+.inum.r{color:var(--red)}.inum.a{color:var(--amber)}.inum.g{color:var(--green)}
+.ititle{font-size:12.5px;font-weight:500;color:var(--text);margin-bottom:7px;line-height:1.4}
+.ibody{font-size:11.5px;color:var(--t2);line-height:1.7;font-weight:300}
+
+/* ROADMAP */
+.rmap{background:var(--white);border:1px solid var(--bd);border-radius:16px;overflow:hidden}
+.rmhd{display:grid;grid-template-columns:100px 1fr 120px;gap:16px;padding:12px 26px;background:var(--s2);border-bottom:1px solid var(--bd);font-family:var(--mono);font-size:9.5px;color:var(--t3);letter-spacing:.08em;text-transform:uppercase}
+.rmrow{display:grid;grid-template-columns:100px 1fr 120px;gap:16px;padding:22px 26px;border-bottom:1px solid var(--bd);align-items:start;transition:background .15s}
+.rmrow:last-child{border-bottom:none}
+.rmrow:hover{background:var(--s2)}
+.rmtag{font-family:var(--mono);font-size:10px;font-weight:500;padding:5px 10px;border-radius:8px;text-align:center;line-height:1.5}
+.rmtag.p1{background:var(--rbg);color:var(--red);border:1px solid var(--rbd)}
+.rmtag.p2{background:var(--abg);color:var(--amber);border:1px solid var(--abd)}
+.rmtag.p3{background:var(--gbg);color:var(--green);border:1px solid var(--gbd)}
+.rmtag.p4{background:var(--bbg);color:var(--blue);border:1px solid var(--bbd)}
+.rmtitle{font-size:12.5px;font-weight:500;color:var(--text);margin-bottom:5px}
+.rmbody{font-size:11.5px;color:var(--t2);line-height:1.65;font-weight:300}
+.rmr{text-align:right}
+.rmamt{font-family:var(--serif);font-size:22px;color:var(--green);margin-bottom:2px;letter-spacing:-.3px}
+.rmsub{font-family:var(--mono);font-size:10px;color:var(--t3);margin-bottom:9px}
+.pbg{height:3px;background:var(--bd);border-radius:4px;overflow:hidden}
+.pbf{height:100%;border-radius:4px;background:var(--green)}
+
+/* SUMMARY */
+.summary{background:#1a1916;border-radius:16px;padding:32px 36px;display:grid;grid-template-columns:auto 1px 1fr;gap:26px;align-items:center;margin-top:32px}
+.sum-l{font-family:var(--serif);font-size:11px;font-style:italic;color:rgba(255,255,255,.2);writing-mode:vertical-rl;transform:rotate(180deg)}
+.sum-d{background:rgba(255,255,255,.1);align-self:stretch}
+.sum-t{font-size:13px;color:rgba(255,255,255,.6);line-height:1.9;font-weight:300}
+.sum-t strong{color:#fff;font-weight:500}
+
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HEADER -->
+<div class="hdr">
+  <div>
+    <div class="eyebrow">Revenue Intelligence · B2C Only</div>
+    <h1>TherapyMantra <em>Growth Brief</em></h1>
+    <p class="hdr-sub">Order book · Plan Start basis · Oct 2025 – Mar 16, 2026 · Leadership review</p>
+  </div>
+  <div class="hdr-r">
+    <div class="hdr-date">March 16, 2026</div>
+    <div class="live"><span class="dot"></span>1,444 unique users · 6 months</div>
+  </div>
+</div>
+
+<!-- KPIs -->
+<div class="kpis">
+  <div class="kpi gn">
+    <div class="kpi-l">6-Month Revenue</div>
+    <div class="kpi-v">$19,301</div>
+    <div class="kpi-s">Oct 2025 – Mar 16, 2026</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-l">Peak Month</div>
+    <div class="kpi-v">$5,095</div>
+    <div class="kpi-s">October 2025</div>
+  </div>
+  <div class="kpi bl">
+    <div class="kpi-l">Active Sub MRR</div>
+    <div class="kpi-v">$916</div>
+    <div class="kpi-s">15 active subs · avg $61</div>
+  </div>
+  <div class="kpi rd">
+    <div class="kpi-l">Subscription Churn</div>
+    <div class="kpi-v">76.2%</div>
+    <div class="kpi-s dn">48 of 63 subs lost</div>
+  </div>
+  <div class="kpi am">
+    <div class="kpi-l">Gap to $30k MRR</div>
+    <div class="kpi-v">~$29k</div>
+    <div class="kpi-s dn">~490 active subs needed</div>
+  </div>
+</div>
+
+<!-- REVENUE CHART -->
+<div class="sec">
+  <div class="sec-hd">
+    <h2 class="sec-title">Monthly Revenue</h2>
+    <span class="sec-note">Oct–Feb are complete months · Mar 2026 is partial (16 days, shown separately)</span>
+  </div>
+  <div class="card">
+    <div class="ct">Revenue per month <span class="bup">↑ 21.4% Jan → Feb</span><span class="bnote">Mar = 16 days only</span></div>
+    <div class="cs">% labels show month-on-month change · only complete months compared</div>
+    <div style="position:relative;height:230px"><canvas id="momChart"></canvas></div>
+  </div>
+</div>
+
+<!-- USERS CHART -->
+<div class="sec">
+  <div class="sec-hd">
+    <h2 class="sec-title">Monthly Users — Paying vs Free Trial</h2>
+    <span class="sec-note">Unique users per month</span>
+  </div>
+  <div class="card">
+    <div class="ct">Paying users vs free-trial-only users each month</div>
+    <div class="cs">A user who both paid and used a free trial in the same month is counted as paying only · the gap between bars shows how much acquisition isn't converting</div>
+    <div class="leg">
+      <div class="li"><div class="ld" style="background:var(--green)"></div>Paid at least once</div>
+      <div class="li"><div class="ld" style="background:#d4d0c8"></div>Free trial only — never paid</div>
+    </div>
+    <div style="position:relative;height:200px"><canvas id="usersChart"></canvas></div>
+  </div>
+</div>
+
+<!-- WoW -->
+<div class="sec">
+  <div class="sec-hd">
+    <h2 class="sec-title">Week-over-Week Revenue</h2>
+    <span class="sec-note">21 weeks · Oct 2025 – Mar 15, 2026</span>
+  </div>
+  <div class="card">
+    <div class="ct">Weekly revenue — no compounding floor</div>
+    <div class="cs">Oscillates with acquisition activity · no subscription base creating a rising baseline · <span style="color:var(--red)">red</span> = weeks below $300</div>
+    <div style="position:relative;height:165px"><canvas id="wowChart"></canvas></div>
+  </div>
+</div>
+
+<!-- FUNNEL + RIGHT -->
+<div class="sec g6535">
+  <div class="card">
+    <div class="ct">User Conversion Funnel</div>
+    <div class="cs">From acquisition to active subscriber · 1,444 total users · Oct 2025 – Mar 16, 2026</div>
+
+    <div class="frow">
+      <div class="fmeta"><span class="fn">All acquired users</span><span class="fv" style="color:var(--text)">1,444 · 100%</span></div>
+      <div class="ftrk"><div class="ffil" style="width:100%;background:var(--green);color:#fff">1,444</div></div>
+    </div>
+    <div class="frow">
+      <div class="fmeta"><span class="fn">Never paid anything</span><span class="fv" style="color:var(--t2)">929 · 64.3%</span></div>
+      <div class="ftrk"><div class="ffil" style="width:64.3%;background:var(--s2);color:var(--t2)">929 — free trial only</div></div>
+    </div>
+
+    <div class="fdiv"></div>
+    <div class="fsub">// of 515 users who made any payment (35.7% of total):</div>
+
+    <div class="frow">
+      <div class="fmeta"><span class="fn">Paid for trial only — never returned</span><span class="fv" style="color:var(--red)">462 · 89.7% of payers</span></div>
+      <div class="ftrk"><div class="ffil" style="width:100%;background:var(--rbg);color:var(--red);border:1px solid var(--rbd)">462 — one transaction, then gone</div></div>
+    </div>
+    <div class="frow">
+      <div class="fmeta"><span class="fn">Bought a session pack</span><span class="fv" style="color:var(--blue)">38 · 7.4% of payers</span></div>
+      <div class="ftrk"><div class="ffil" style="width:7.4%;background:var(--blue);color:#fff">38</div></div>
+    </div>
+    <div class="frow">
+      <div class="fmeta"><span class="fn">Active subscriber today</span><span class="fv" style="color:var(--red)">15 · 2.9% of payers</span></div>
+      <div class="ftrk"><div class="ffil" style="width:2.9%;background:var(--red);color:#fff"></div></div>
+    </div>
+
+    <p class="fnote"><strong>89.7%</strong> of every paying user we have ever had made one transaction — a trial — and never came back. Acquisition is working. The post-trial conversion layer does not exist yet.</p>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:14px">
+    <div class="card">
+      <div class="ct">Revenue Mix</div>
+      <div class="cs">By product category · Oct '25 – Mar '26</div>
+      <div style="position:relative;height:150px"><canvas id="donutChart"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="ct">Subscription Health</div>
+      <div class="cs">63 real subs ever created · status Mar 16, 2026</div>
+      <div class="srow"><span class="sl">Active</span><span class="sv g">15 &nbsp;(23.8%)</span></div>
+      <div class="srow"><span class="sl">Canceled by user</span><span class="sv r">34 &nbsp;(54.0%)</span></div>
+      <div class="srow"><span class="sl">Expired — did not renew</span><span class="sv r">9 &nbsp;&nbsp;(14.3%)</span></div>
+      <div class="srow"><span class="sl">Paused / halted</span><span class="sv a">5 &nbsp;&nbsp;(7.9%)</span></div>
+      <div class="srow" style="padding-top:11px;margin-top:3px;border-top:1px solid var(--bd2)">
+        <span class="sl" style="font-weight:500;color:var(--text)">Effective churn rate</span>
+        <span class="sv r" style="font-size:16px">76.2%</span>
+      </div>
+      <p class="snote">Churned subscribers averaged $131/mo vs $61 for actives — highest-value users are churning fastest.</p>
+    </div>
+  </div>
+</div>
+
+<!-- INSIGHTS -->
+<div class="sec">
+  <div class="sec-hd"><h2 class="sec-title">Key Findings</h2></div>
+  <div class="g3">
+    <div class="icard">
+      <span class="itag r">Core Problem</span>
+      <div class="inum r">89.7%</div>
+      <div class="ititle">Nearly all paying users stop at trial and never come back</div>
+      <div class="ibody">462 of 515 paying users transacted exactly once — a trial purchase. There is no post-trial moment that converts a user into a subscriber. The acquisition is working; the conversion layer doesn't exist yet.</div>
+    </div>
+    <div class="icard">
+      <span class="itag r">Revenue Structure</span>
+      <div class="inum r">48.4%</div>
+      <div class="ititle">Almost half of all revenue is one-time trial purchases</div>
+      <div class="ibody">~$9,300 of $19,301 came from trial purchases alone — single transactions with no renewal. Without a subscription layer compounding each month, revenue rises and falls entirely with ad spend.</div>
+    </div>
+    <div class="icard">
+      <span class="itag r">Retention</span>
+      <div class="inum r">76.2%</div>
+      <div class="ititle">Churn rate makes $30k MRR unreachable at current pace</div>
+      <div class="ibody">At 76.2% churn, we'd need to acquire 130+ new subscribers every single month just to hold flat at 30 active. Churn must come below 30% before we scale acquisition behind it.</div>
+    </div>
+    <div class="icard">
+      <span class="itag a">Trend</span>
+      <div class="inum a">-47.8%</div>
+      <div class="ititle">Revenue fell 47.8% from October to February across complete months</div>
+      <div class="ibody">Oct $5,095 → Feb $2,659. The Jan → Feb recovery of +21.4% shows the business responds to acquisition spend — but without subscriptions compounding, every month restarts from zero.</div>
+    </div>
+    <div class="icard">
+      <span class="itag a">Attribution</span>
+      <div class="inum a">88.4%</div>
+      <div class="ititle">Almost no ad spend has attribution — ROAS is invisible</div>
+      <div class="ibody">88.4% of all orders carry no UTM source tag. We cannot identify which campaign, channel, or creative drives paying users versus free-trial takers. We are optimizing ad spend for clicks, not conversions.</div>
+    </div>
+    <div class="icard">
+      <span class="itag g">Opportunity</span>
+      <div class="inum g">929</div>
+      <div class="ititle">Free-trial pool is a near-zero-CAC re-engagement base</div>
+      <div class="ibody">929 users took a free trial and never paid anything. A 3-email post-trial sequence (Day 1 / Day 4 / Day 10) at 10% conversion alone is 93 new paying users — from an audience we already own, at essentially no acquisition cost.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ROADMAP -->
+<div class="sec">
+  <div class="sec-hd">
+    <h2 class="sec-title">Path to $30,000 MRR</h2>
+    <span class="sec-note">B2C only · 9-month plan · ~490 active subscribers required at current avg $61</span>
+  </div>
+  <div class="rmap">
+    <div class="rmhd">
+      <span>Phase</span><span>Initiative</span><span style="text-align:right">MRR Target</span>
+    </div>
+    <div class="rmrow">
+      <div><div class="rmtag p1">Month 1–2<br>Fix the floor</div></div>
+      <div>
+        <div class="rmtitle">Stop losing subscribers before adding more</div>
+        <div class="rmbody">Launch a post-trial upsell immediately after a session ends — show the 1-month plan with a first-timer offer. Add UTM parameters to every ad link. Set up a 3-email drip for all free-trial users (Day 1 / Day 4 / Day 10). Add a pause option so users who would cancel can hold instead.</div>
+      </div>
+      <div class="rmr">
+        <div class="rmamt">$2,500</div>
+        <div class="rmsub">~40 active subs</div>
+        <div class="pbg"><div class="pbf" style="width:8%"></div></div>
+      </div>
+    </div>
+    <div class="rmrow">
+      <div><div class="rmtag p2">Month 3–4<br>Build the engine</div></div>
+      <div>
+        <div class="rmtitle">Improve product-to-subscription fit</div>
+        <div class="rmbody">Add a therapist-match quiz before booking — fit is the primary driver of retention in therapy products. A/B test plan pricing: $49 vs $69 vs $89/month. Introduce 3-month and 6-month plans at a 15% discount to increase upfront LTV. Launch couples-specific ad creatives — observed LTV is 4–5× the individual average.</div>
+      </div>
+      <div class="rmr">
+        <div class="rmamt">$8,000</div>
+        <div class="rmsub">~130 active subs</div>
+        <div class="pbg"><div class="pbf" style="width:27%"></div></div>
+      </div>
+    </div>
+    <div class="rmrow">
+      <div><div class="rmtag p3">Month 5–6<br>Scale smart</div></div>
+      <div>
+        <div class="rmtitle">Let attribution data drive every ad rupee</div>
+        <div class="rmbody">By month 5 we have 3+ months of UTM data. Identify which campaigns drive trial → subscription conversion — not just trial volume — and double down on those. Cut campaigns that drive only free-trial takers. Target MENA and Southeast Asia more deliberately — Egypt, Saudi Arabia, and Indonesia have shown organic traction at above-average order values.</div>
+      </div>
+      <div class="rmr">
+        <div class="rmamt">$18,000</div>
+        <div class="rmsub">~295 active subs</div>
+        <div class="pbg"><div class="pbf" style="width:60%"></div></div>
+      </div>
+    </div>
+    <div class="rmrow">
+      <div><div class="rmtag p4">Month 7–9<br>Compound</div></div>
+      <div>
+        <div class="rmtitle">Re-engage, retain, and close the gap</div>
+        <div class="rmbody">Run a win-back campaign for all 48 churned subscribers — warm audiences convert at 2–3× the cost of cold acquisition. Introduce annual plans to lock in LTV and reduce monthly churn pressure. With trial → subscription CVR improved to 15–20%, the unit economics support meaningful ad scale to reach $30k.</div>
+      </div>
+      <div class="rmr">
+        <div class="rmamt">$30,000</div>
+        <div class="rmsub">~490 active subs</div>
+        <div class="pbg"><div class="pbf" style="width:100%"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUMMARY -->
+<div class="summary">
+  <div class="sum-l">Summary</div>
+  <div class="sum-d"></div>
+  <p class="sum-t">We generated <strong>$19,301 across six months</strong> with a peak of <strong>$5,095 in October</strong>. The core problem is what happens after a user arrives: <strong>89.7% of every paying user we have ever had made one transaction — a trial — and never came back.</strong> Subscription churn sits at 76.2%, meaning the moment we do convert someone, we lose them at nearly the same rate. The path to $30k MRR requires roughly <strong>490 active subscribers</strong>. We have 15 today. This is not a marketing problem — it is a post-trial conversion and retention problem. Fix those two things first, instrument attribution second, then scale spend with confidence.</p>
+</div>
+
+</div>
+
+<script>
+Chart.defaults.font.family = "'DM Sans', sans-serif";
+Chart.defaults.color = '#605c54';
+Chart.defaults.borderColor = '#e4e0d8';
+
+const tip = {
+  backgroundColor:'#fff', titleColor:'#1a1916', bodyColor:'#605c54',
+  borderColor:'#e4e0d8', borderWidth:1, padding:12, cornerRadius:8, boxPadding:4,
+  titleFont:{family:"'DM Mono'",size:11}, bodyFont:{family:"'DM Sans'",size:12}
+};
+
+// Revenue chart with MoM annotations
+const momData = [5095,4467,3314,2191,2659,1574];
+const momLabels = ["Oct '25","Nov '25","Dec '25","Jan '26","Feb '26","Mar '26*"];
+const momChanges = [null,-12.3,-25.8,-33.9,+21.4,null];
+const momColors = [
+  'rgba(30,104,64,.8)',
+  'rgba(30,104,64,.7)',
+  'rgba(30,104,64,.6)',
+  'rgba(30,104,64,.5)',
+  'rgba(30,104,64,.8)',
+  'rgba(30,104,64,.35)'
+];
+
+const annotPlugin = {
+  id:'annot',
+  afterDatasetsDraw(chart){
+    const {ctx,scales:{x,y}} = chart;
+    ctx.save();
+    momChanges.forEach((c,i)=>{
+      if(c===null) return;
+      const xp = x.getPixelForValue(i);
+      const yp = y.getPixelForValue(momData[i]) - 26;
+      const lbl = (c>0?'▲ +':'▼ ') + Math.abs(c) + '%';
+      ctx.font = "500 10px 'DM Mono'";
+      ctx.fillStyle = c>0 ? '#1e6840' : '#b02a2a';
+      ctx.textAlign = 'center';
+      ctx.fillText(lbl, xp, yp);
+    });
+    ctx.restore();
+  }
+};
+
+new Chart(document.getElementById('momChart'),{
+  type:'bar', plugins:[annotPlugin],
+  data:{
+    labels:momLabels,
+    datasets:[{
+      data:momData,
+      backgroundColor:momColors,
+      borderColor:momColors.map(c=>c.replace(/[\d.]+\)$/,'1)')),
+      borderWidth:1, borderRadius:7
+    }]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    layout:{padding:{top:36}},
+    plugins:{legend:{display:false},tooltip:{...tip,callbacks:{label:ctx=>' $'+ctx.raw.toLocaleString()}}},
+    scales:{
+      x:{ticks:{font:{size:12}},grid:{display:false}},
+      y:{beginAtZero:true,ticks:{font:{size:11},callback:v=>'$'+v.toLocaleString()},grid:{color:'#eeebe4'}}
+    }
+  }
+});
+
+// Users chart
+new Chart(document.getElementById('usersChart'),{
+  type:'bar',
+  data:{
+    labels:["Oct '25","Nov '25","Dec '25","Jan '26","Feb '26","Mar '26*"],
+    datasets:[
+      {label:'Paying users',data:[108,87,76,128,112,79],backgroundColor:'rgba(30,104,64,.8)',borderColor:'#1e6840',borderWidth:1,borderRadius:5},
+      {label:'Free trial only',data:[133,173,67,132,289,145],backgroundColor:'rgba(212,208,200,.6)',borderColor:'rgba(180,176,168,.8)',borderWidth:1,borderRadius:5}
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{...tip,mode:'index',callbacks:{label:ctx=>' '+ctx.dataset.label+': '+ctx.raw}}},
+    scales:{
+      x:{ticks:{font:{size:12}},grid:{display:false}},
+      y:{beginAtZero:true,ticks:{font:{size:11}},grid:{color:'#eeebe4'}}
+    }
+  }
+});
+
+// WoW
+new Chart(document.getElementById('wowChart'),{
+  type:'line',
+  data:{
+    labels:['Oct W2','Oct W3','Oct W4','Oct W5','Nov W2','Nov W3','Nov W4','Dec W2','Dec W3','Dec W4','Jan W1','Jan W2','Jan W3','Jan W4','Feb W1','Feb W2','Feb W3','Feb W4','Mar W1','Mar W2','Mar W3'],
+    datasets:[{
+      data:[258,1363,1124,1161,962,549,599,1094,628,518,1112,482,403,173,348,761,689,263,756,1056,599],
+      borderColor:'#1e6840',
+      backgroundColor:ctx=>{
+        const {ctx:c,chartArea}=ctx.chart;
+        if(!chartArea) return 'transparent';
+        const g=c.createLinearGradient(0,chartArea.top,0,chartArea.bottom);
+        g.addColorStop(0,'rgba(30,104,64,.1)');
+        g.addColorStop(1,'rgba(30,104,64,0)');
+        return g;
+      },
+      pointRadius:ctx=>ctx.raw<300?5:3,
+      pointBackgroundColor:ctx=>ctx.raw<300?'#b02a2a':'#1e6840',
+      pointBorderColor:'#fff', pointBorderWidth:2,
+      tension:0.4, fill:true, borderWidth:2
+    }]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{...tip,callbacks:{label:ctx=>' $'+ctx.raw.toLocaleString()}}},
+    scales:{
+      x:{ticks:{font:{size:10},maxRotation:45,autoSkip:false},grid:{display:false}},
+      y:{beginAtZero:true,ticks:{font:{size:10},callback:v=>'$'+v.toLocaleString()},grid:{color:'#eeebe4'}}
+    }
+  }
+});
+
+// Donut
+new Chart(document.getElementById('donutChart'),{
+  type:'doughnut',
+  data:{
+    labels:['Trial purchases (48.4%)','Session packs (27.7%)','Subscriptions & other (23.9%)'],
+    datasets:[{
+      data:[9345,5347,4609],
+      backgroundColor:['#b02a2a','#1840a0','#8f5000'],
+      borderWidth:3, borderColor:'#fff', hoverBorderColor:'#f6f4f0'
+    }]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false, cutout:'65%',
+    plugins:{
+      legend:{position:'right',labels:{font:{size:10},padding:10,boxWidth:10,color:'#605c54'}},
+      tooltip:{...tip,callbacks:{label:ctx=>' $'+ctx.raw.toLocaleString()}}
+    }
+  }
+});
+</script>
+</body>
+</html>
