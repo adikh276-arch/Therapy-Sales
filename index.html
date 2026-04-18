@@ -3,544 +3,437 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TherapyMantra — B2C Revenue Brief</title>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Therapy Revenue War Room — Apr 2026</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
-:root {
-  --bg:      #f6f4f0;
-  --white:   #ffffff;
-  --s2:      #f0ede8;
-  --bd:      #e4e0d8;
-  --bd2:     #cbc6bc;
-  --text:    #1a1916;
-  --t2:      #605c54;
-  --t3:      #a8a49c;
-  --green:   #1e6840;
-  --gbg:     #edf6f1;
-  --gbd:     #b4d9c4;
-  --red:     #b02a2a;
-  --rbg:     #fdf0f0;
-  --rbd:     #e8b8b8;
-  --amber:   #8f5000;
-  --abg:     #fdf4e7;
-  --abd:     #edcc94;
-  --blue:    #1840a0;
-  --bbg:     #edf1fc;
-  --bbd:     #b4c4ec;
-  --serif: 'Lora', serif;
-  --sans:  'DM Sans', sans-serif;
-  --mono:  'DM Mono', monospace;
-}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:13px;line-height:1.6;-webkit-font-smoothing:antialiased}
-.wrap{max-width:1160px;margin:0 auto;padding:0 36px 80px}
+:root{
+  --bg:#f7f7f5;--surface:#fff;--s2:#f2f1ee;
+  --border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.14);
+  --text:#1a1a18;--text2:#5f5e5a;--text3:#9a9890;
+  --blue:#378ADD;--blue-lt:#E6F1FB;--blue-dk:#0C447C;
+  --green:#639922;--green-lt:#EAF3DE;--green-dk:#27500A;
+  --amber:#BA7517;--amber-lt:#FAEEDA;--amber-dk:#633806;
+  --red:#E24B4A;--red-lt:#FCEBEB;--red-dk:#791F1F;
+  --teal:#1D9E75;--teal-lt:#E1F5EE;--teal-dk:#085041;
+  --pink:#D4537E;--pink-lt:#FBEAF0;--pink-dk:#4B1528;
+  --r:10px;--rs:6px;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;min-height:100vh}
+.page{max-width:1120px;margin:0 auto;padding:36px 24px 80px}
 
-/* HEADER */
-.hdr{padding:48px 0 40px;display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid var(--bd);margin-bottom:40px}
-.eyebrow{font-family:var(--mono);font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;display:flex;align-items:center;gap:10px}
-.eyebrow::before{content:'';width:20px;height:1px;background:var(--bd2)}
-h1{font-family:var(--serif);font-size:38px;font-weight:400;line-height:1.1;letter-spacing:-.3px;margin-bottom:8px}
-h1 em{font-style:italic;color:var(--green)}
-.hdr-sub{font-size:12px;color:var(--t2);font-weight:300}
-.hdr-r{text-align:right}
-.hdr-date{font-family:var(--mono);font-size:11px;color:var(--t3);margin-bottom:8px}
-.live{display:inline-flex;align-items:center;gap:7px;background:var(--gbg);border:1px solid var(--gbd);border-radius:100px;padding:4px 12px;font-size:11px;color:var(--green);font-weight:500}
-.dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 2s ease infinite}
+.header{margin-bottom:30px;border-bottom:1px solid var(--border2);padding-bottom:18px;display:flex;justify-content:space-between;align-items:flex-end}
+.header h1{font-size:22px;font-weight:700;letter-spacing:-.4px}
+.header .sub{font-size:12px;color:var(--text2);margin-top:5px}
+.header .dt{text-align:right;font-size:11px;color:var(--text3)}
+.header .dt strong{display:block;font-size:13px;color:var(--text2);font-weight:600}
 
-/* KPIs */
-.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:36px}
-.kpi{background:var(--white);border:1px solid var(--bd);border-top:3px solid var(--bd2);border-radius:12px;padding:20px 18px 16px;transition:box-shadow .2s}
-.kpi:hover{box-shadow:0 2px 14px rgba(0,0,0,.07)}
-.kpi.gn{border-top-color:var(--green)}
-.kpi.rd{border-top-color:var(--red)}
-.kpi.am{border-top-color:var(--amber)}
-.kpi.bl{border-top-color:var(--blue)}
-.kpi-l{font-family:var(--mono);font-size:9.5px;color:var(--t3);text-transform:uppercase;letter-spacing:.09em;margin-bottom:11px}
-.kpi-v{font-family:var(--serif);font-size:28px;color:var(--text);line-height:1;margin-bottom:6px;letter-spacing:-.3px}
-.kpi-s{font-size:11px;color:var(--t2);font-weight:300}
-.kpi-s.dn{color:var(--red)}.kpi-s.up{color:var(--green)}
+.section{margin-bottom:32px}
+.sl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:12px}
 
-/* SECTIONS */
-.sec{margin-bottom:30px}
-.sec-hd{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
-.sec-title{font-family:var(--serif);font-size:20px;font-weight:400;color:var(--text)}
-.sec-note{font-size:11px;color:var(--t3);font-weight:300}
+.mg{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.met{background:var(--s2);border-radius:var(--rs);padding:14px 16px}
+.met .ml{font-size:11px;color:var(--text3);margin-bottom:4px;font-weight:500}
+.met .mv{font-size:23px;font-weight:700;letter-spacing:-.5px}
+.met .ms{font-size:11px;color:var(--text3);margin-top:3px}
+.met.warn .mv{color:var(--amber)}.met.good .mv{color:var(--green)}.met.bad .mv{color:var(--red)}.met.teal .mv{color:var(--teal)}
 
-/* CARDS */
-.card{background:var(--white);border:1px solid var(--bd);border-radius:16px;padding:24px}
-.ct{font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px}
-.cs{font-size:11px;color:var(--t3);margin-bottom:16px;font-weight:300}
+.card{background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--r);padding:18px 20px}
+.card+.card{margin-top:14px}
+.ct{font-size:13px;font-weight:700;color:var(--text);margin-bottom:12px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 
-/* BADGE */
-.bdn{display:inline-block;font-family:var(--mono);font-size:10px;padding:2px 8px;border-radius:100px;margin-left:5px;vertical-align:middle;background:var(--rbg);color:var(--red);border:1px solid var(--rbd)}
-.bup{display:inline-block;font-family:var(--mono);font-size:10px;padding:2px 8px;border-radius:100px;margin-left:5px;vertical-align:middle;background:var(--gbg);color:var(--green);border:1px solid var(--gbd)}
-.bnote{display:inline-block;font-family:var(--mono);font-size:10px;padding:2px 8px;border-radius:100px;margin-left:5px;vertical-align:middle;background:var(--s2);color:var(--t2);border:1px solid var(--bd)}
+.cw{position:relative;width:100%}
+.h300{height:300px}.h260{height:260px}.h220{height:220px}.h200{height:200px}.h180{height:180px}
 
-/* GRIDS */
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
-.g6535{display:grid;grid-template-columns:1.75fr 1fr;gap:14px}
+.leg{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--text2);margin-bottom:10px}
+.leg span{display:flex;align-items:center;gap:5px}
+.dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
 
-/* LEGEND */
-.leg{display:flex;gap:16px;margin-bottom:14px;font-size:11px;color:var(--t2);flex-wrap:wrap}
-.li{display:flex;align-items:center;gap:5px}
-.ld{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+.wt{width:100%;border-collapse:collapse;font-size:12px}
+.wt th{text-align:right;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);padding:6px 8px;border-bottom:1.5px solid var(--border2);white-space:nowrap}
+.wt th:first-child,.wt th:nth-child(2){text-align:left}
+.wt td{text-align:right;padding:7px 8px;border-bottom:0.5px solid var(--border);color:var(--text2);font-variant-numeric:tabular-nums}
+.wt td:first-child{text-align:left;font-weight:600;color:var(--text)}
+.wt td:nth-child(2){text-align:left;font-size:11px;color:var(--text3)}
+.wt tr:hover td{background:var(--s2)}
+.wt .sep td{background:var(--s2);border-top:1.5px solid var(--border2);border-bottom:1.5px solid var(--border2);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);padding:4px 8px}
+.wt .hi{color:var(--green);font-weight:700}.wt .lo{color:var(--red)}.wt .tc{font-weight:700;color:var(--text)}
 
-/* FUNNEL */
-.frow{margin-bottom:9px}
-.fmeta{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
-.fn{font-size:12px;color:var(--t2)}
-.fv{font-family:var(--mono);font-size:11px;font-weight:500}
-.ftrk{height:24px;background:var(--s2);border-radius:6px;overflow:hidden}
-.ffil{height:100%;border-radius:5px;display:flex;align-items:center;padding-left:10px;font-size:10px;font-weight:500}
-.fdiv{height:1px;background:var(--bd);margin:13px 0 11px}
-.fsub{font-family:var(--mono);font-size:10px;color:var(--t3);margin-bottom:10px}
-.fnote{font-size:11px;color:var(--t2);line-height:1.65;margin-top:14px;padding-top:14px;border-top:1px solid var(--bd);font-weight:300}
-.fnote strong{color:var(--red);font-weight:500}
+.frow{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.fl{font-size:12px;color:var(--text2);width:80px;text-align:right;flex-shrink:0}
+.fw{flex:1;background:var(--s2);border-radius:4px;height:26px;overflow:hidden}
+.fb{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px;font-size:11px;font-weight:700;white-space:nowrap}
+.fv{font-size:12px;font-weight:700;color:var(--text);width:62px;flex-shrink:0;text-align:right}
 
-/* STAT ROWS */
-.srow{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--bd);font-size:12px}
-.srow:last-child{border-bottom:none}
-.sl{color:var(--t2);font-weight:300}
-.sv{font-family:var(--mono);font-weight:500}
-.sv.g{color:var(--green)}.sv.r{color:var(--red)}.sv.a{color:var(--amber)}
-.snote{font-size:11px;color:var(--t3);margin-top:10px;line-height:1.6;font-weight:300}
+.il{list-style:none}
+.il li{font-size:13px;color:var(--text2);padding:11px 0;border-bottom:0.5px solid var(--border);line-height:1.65}
+.il li:last-child{border-bottom:none}
+.il li strong{color:var(--text);font-weight:600}
+.tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:6px;vertical-align:middle;letter-spacing:.03em;text-transform:uppercase}
+.tr{background:var(--red-lt);color:var(--red-dk)}.ta{background:var(--amber-lt);color:var(--amber-dk)}
+.tg{background:var(--green-lt);color:var(--green-dk)}.tt{background:var(--teal-lt);color:var(--teal-dk)}
 
-/* INSIGHT CARDS */
-.icard{background:var(--white);border:1px solid var(--bd);border-radius:16px;padding:22px;transition:box-shadow .2s}
-.icard:hover{box-shadow:0 2px 14px rgba(0,0,0,.07)}
-.itag{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;padding:3px 10px;border-radius:100px;font-weight:500;margin-bottom:14px}
-.itag.r{background:var(--rbg);color:var(--red);border:1px solid var(--rbd)}
-.itag.a{background:var(--abg);color:var(--amber);border:1px solid var(--abd)}
-.itag.g{background:var(--gbg);color:var(--green);border:1px solid var(--gbd)}
-.inum{font-family:var(--serif);font-size:38px;line-height:1;margin-bottom:9px;letter-spacing:-1px}
-.inum.r{color:var(--red)}.inum.a{color:var(--amber)}.inum.g{color:var(--green)}
-.ititle{font-size:12.5px;font-weight:500;color:var(--text);margin-bottom:7px;line-height:1.4}
-.ibody{font-size:11.5px;color:var(--t2);line-height:1.7;font-weight:300}
+.al{border-radius:var(--rs);padding:11px 14px;font-size:12px;line-height:1.65;margin-bottom:8px}
+.al:last-child{margin-bottom:0}
+.ar{background:var(--red-lt);color:var(--red-dk)}.ar strong{color:#501313}
+.ag{background:var(--green-lt);color:var(--green-dk)}.ag strong{color:#173404}
+.aa{background:var(--amber-lt);color:var(--amber-dk)}.aa strong{color:#412402}
+.ab{background:var(--blue-lt);color:var(--blue-dk)}.ab strong{color:#042C53}
+.at{background:var(--teal-lt);color:var(--teal-dk)}.at strong{color:#04342C}
 
-/* ROADMAP */
-.rmap{background:var(--white);border:1px solid var(--bd);border-radius:16px;overflow:hidden}
-.rmhd{display:grid;grid-template-columns:100px 1fr 120px;gap:16px;padding:12px 26px;background:var(--s2);border-bottom:1px solid var(--bd);font-family:var(--mono);font-size:9.5px;color:var(--t3);letter-spacing:.08em;text-transform:uppercase}
-.rmrow{display:grid;grid-template-columns:100px 1fr 120px;gap:16px;padding:22px 26px;border-bottom:1px solid var(--bd);align-items:start;transition:background .15s}
-.rmrow:last-child{border-bottom:none}
-.rmrow:hover{background:var(--s2)}
-.rmtag{font-family:var(--mono);font-size:10px;font-weight:500;padding:5px 10px;border-radius:8px;text-align:center;line-height:1.5}
-.rmtag.p1{background:var(--rbg);color:var(--red);border:1px solid var(--rbd)}
-.rmtag.p2{background:var(--abg);color:var(--amber);border:1px solid var(--abd)}
-.rmtag.p3{background:var(--gbg);color:var(--green);border:1px solid var(--gbd)}
-.rmtag.p4{background:var(--bbg);color:var(--blue);border:1px solid var(--bbd)}
-.rmtitle{font-size:12.5px;font-weight:500;color:var(--text);margin-bottom:5px}
-.rmbody{font-size:11.5px;color:var(--t2);line-height:1.65;font-weight:300}
-.rmr{text-align:right}
-.rmamt{font-family:var(--serif);font-size:22px;color:var(--green);margin-bottom:2px;letter-spacing:-.3px}
-.rmsub{font-family:var(--mono);font-size:10px;color:var(--t3);margin-bottom:9px}
-.pbg{height:3px;background:var(--bd);border-radius:4px;overflow:hidden}
-.pbf{height:100%;border-radius:4px;background:var(--green)}
+.ag2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ac{background:var(--s2);border-left:3px solid var(--blue);border-radius:0 var(--rs) var(--rs) 0;padding:12px 14px}
+.ac.urg{border-left-color:var(--red)}.ac.grw{border-left-color:var(--green)}.ac.tcl{border-left-color:var(--teal)}
+.ac .act{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;color:var(--blue)}
+.ac.urg .act{color:var(--red)}.ac.grw .act{color:var(--green)}.ac.tcl .act{color:var(--teal)}
+.ac h4{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
+.ac p{font-size:12px;color:var(--text2);line-height:1.55}
 
-/* SUMMARY */
-.summary{background:#1a1916;border-radius:16px;padding:32px 36px;display:grid;grid-template-columns:auto 1px 1fr;gap:26px;align-items:center;margin-top:32px}
-.sum-l{font-family:var(--serif);font-size:11px;font-style:italic;color:rgba(255,255,255,.2);writing-mode:vertical-rl;transform:rotate(180deg)}
-.sum-d{background:rgba(255,255,255,.1);align-self:stretch}
-.sum-t{font-size:13px;color:rgba(255,255,255,.6);line-height:1.9;font-weight:300}
-.sum-t strong{color:#fff;font-weight:500}
+.pg{background:var(--s2);border-radius:4px;height:8px;overflow:hidden;margin-top:5px}
+.pb{height:100%;border-radius:4px}
 
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.math{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0}
+.mi{padding:16px 18px;border-right:0.5px solid var(--border2)}
+.mi:last-child{border-right:none}
+.mi .ml{font-size:11px;color:var(--text3);margin-bottom:5px;font-weight:500}
+.mi .mv{font-size:22px;font-weight:700;letter-spacing:-.4px}
+.mi p{font-size:12px;color:var(--text2);line-height:1.6;margin-top:7px}
+
+.note{font-size:11px;color:var(--text3);margin-top:8px}
+.div{height:0.5px;background:var(--border2);margin:16px 0}
+.tr-row{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:0.5px solid var(--border)}
+.tr-row:last-child{border-bottom:none}
+
+@media(max-width:700px){
+  .mg,.two,.ag2,.math{grid-template-columns:1fr}
+  .mg{grid-template-columns:repeat(2,1fr)}
+  .mi{border-right:none;border-bottom:0.5px solid var(--border2)}
+  .mi:last-child{border-bottom:none}
+}
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="page">
 
 <!-- HEADER -->
-<div class="hdr">
+<div class="header">
   <div>
-    <div class="eyebrow">Revenue Intelligence · B2C Only</div>
-    <h1>TherapyMantra <em>Growth Brief</em></h1>
-    <p class="hdr-sub">Order book · Plan Start basis · Oct 2025 – Mar 16, 2026 · Leadership review</p>
+    <h1>Therapy Revenue War Room</h1>
+    <div class="sub">Nov 2025 – 17 Apr 2026 &nbsp;·&nbsp; 991 transactions &nbsp;·&nbsp; Weeks run Sun → Sat, reviewed every Saturday EOD &nbsp;·&nbsp; Date = Plan Start (billing date)</div>
   </div>
-  <div class="hdr-r">
-    <div class="hdr-date">March 16, 2026</div>
-    <div class="live"><span class="dot"></span>1,444 unique users · 6 months</div>
-  </div>
+  <div class="dt"><strong>Sat 18 Apr 2026</strong>Review date</div>
 </div>
 
 <!-- KPIs -->
-<div class="kpis">
-  <div class="kpi gn">
-    <div class="kpi-l">6-Month Revenue</div>
-    <div class="kpi-v">$19,301</div>
-    <div class="kpi-s">Oct 2025 – Mar 16, 2026</div>
-  </div>
-  <div class="kpi">
-    <div class="kpi-l">Peak Month</div>
-    <div class="kpi-v">$5,095</div>
-    <div class="kpi-s">October 2025</div>
-  </div>
-  <div class="kpi bl">
-    <div class="kpi-l">Active Sub MRR</div>
-    <div class="kpi-v">$916</div>
-    <div class="kpi-s">15 active subs · avg $61</div>
-  </div>
-  <div class="kpi rd">
-    <div class="kpi-l">Subscription Churn</div>
-    <div class="kpi-v">76.2%</div>
-    <div class="kpi-s dn">48 of 63 subs lost</div>
-  </div>
-  <div class="kpi am">
-    <div class="kpi-l">Gap to $30k MRR</div>
-    <div class="kpi-v">~$29k</div>
-    <div class="kpi-s dn">~490 active subs needed</div>
-  </div>
-</div>
-
-<!-- REVENUE CHART -->
-<div class="sec">
-  <div class="sec-hd">
-    <h2 class="sec-title">Monthly Revenue</h2>
-    <span class="sec-note">Oct–Feb are complete months · Mar 2026 is partial (16 days, shown separately)</span>
+<div class="section">
+  <div class="sl">Six-month pulse</div>
+  <div class="mg">
+    <div class="met"><div class="ml">Total 6-month revenue</div><div class="mv">$20,456</div><div class="ms">991 transactions</div></div>
+    <div class="met warn"><div class="ml">Best month (Nov 2025)</div><div class="mv">$3,798</div><div class="ms">vs $10–12k target</div></div>
+    <div class="met bad"><div class="ml">Trough (Jan 2026)</div><div class="mv">$2,322</div><div class="ms">–39% from Nov peak</div></div>
+    <div class="met good"><div class="ml">Apr 2026 (17d in)</div><div class="mv">$4,095</div><div class="ms">best month on record</div></div>
   </div>
   <div class="card">
-    <div class="ct">Revenue per month <span class="bup">↑ 21.4% Jan → Feb</span><span class="bnote">Mar = 16 days only</span></div>
-    <div class="cs">% labels show month-on-month change · only complete months compared</div>
-    <div style="position:relative;height:230px"><canvas id="momChart"></canvas></div>
-  </div>
-</div>
-
-<!-- USERS CHART -->
-<div class="sec">
-  <div class="sec-hd">
-    <h2 class="sec-title">Monthly Users — Paying vs Free Trial</h2>
-    <span class="sec-note">Unique users per month</span>
-  </div>
-  <div class="card">
-    <div class="ct">Paying users vs free-trial-only users each month</div>
-    <div class="cs">A user who both paid and used a free trial in the same month is counted as paying only · the gap between bars shows how much acquisition isn't converting</div>
+    <div class="ct">Monthly revenue — Nov 2025 to Apr 2026</div>
     <div class="leg">
-      <div class="li"><div class="ld" style="background:var(--green)"></div>Paid at least once</div>
-      <div class="li"><div class="ld" style="background:#d4d0c8"></div>Free trial only — never paid</div>
+      <span><span class="dot" style="background:#85B7EB"></span>Trial/Entry</span>
+      <span><span class="dot" style="background:#97C459"></span>Pack-4</span>
+      <span><span class="dot" style="background:#ED93B1"></span>Pack-12/24</span>
+      <span><span class="dot" style="background:#FAC775"></span>Intern (100% margin)</span>
+      <span><span class="dot" style="background:#B4B2A9"></span>Other</span>
     </div>
-    <div style="position:relative;height:200px"><canvas id="usersChart"></canvas></div>
+    <div class="cw h300"><canvas id="monthlyChart" role="img" aria-label="Monthly stacked bar chart Nov 2025 to Apr 2026"></canvas></div>
   </div>
 </div>
 
-<!-- WoW -->
-<div class="sec">
-  <div class="sec-hd">
-    <h2 class="sec-title">Week-over-Week Revenue</h2>
-    <span class="sec-note">21 weeks · Oct 2025 – Mar 15, 2026</span>
+<!-- WEEKLY CHARTS -->
+<div class="section">
+  <div class="sl">Weekly revenue — Nov 2025 to 17 Apr 2026 (Sun–Sat, EOD Saturday)</div>
+  <div class="card" style="margin-bottom:14px">
+    <div class="ct">Weekly stacked revenue — all tiers</div>
+    <div class="leg">
+      <span><span class="dot" style="background:#85B7EB"></span>Trial</span>
+      <span><span class="dot" style="background:#97C459"></span>Pack-4</span>
+      <span><span class="dot" style="background:#ED93B1"></span>Pack-12/24</span>
+      <span><span class="dot" style="background:#FAC775"></span>Intern</span>
+      <span><span class="dot" style="background:#B4B2A9"></span>Other</span>
+    </div>
+    <div class="cw h260"><canvas id="weeklyBarChart" role="img" aria-label="Weekly stacked bar chart"></canvas></div>
+    <p class="note">Each bar = Sun through Sat (Plan Start date). Week ending 18 Apr includes data through 17 Apr only — Sat 18 Apr billing completes at EOD.</p>
+  </div>
+  <div class="card" style="margin-bottom:14px">
+    <div class="ct">Weekly trend lines — total, Pack-4, Pack-12/24, Intern</div>
+    <div class="leg">
+      <span><span class="dot" style="background:#378ADD;border-radius:50%"></span>Total</span>
+      <span><span class="dot" style="background:#639922;border-radius:50%"></span>Pack-4</span>
+      <span><span class="dot" style="background:#D4537E;border-radius:50%"></span>Pack-12/24</span>
+      <span><span class="dot" style="background:#BA7517;border-radius:50%"></span>Intern</span>
+    </div>
+    <div class="cw h220"><canvas id="weeklyLineChart" role="img" aria-label="Weekly line chart"></canvas></div>
   </div>
   <div class="card">
-    <div class="ct">Weekly revenue — no compounding floor</div>
-    <div class="cs">Oscillates with acquisition activity · no subscription base creating a rising baseline · <span style="color:var(--red)">red</span> = weeks below $300</div>
-    <div style="position:relative;height:165px"><canvas id="wowChart"></canvas></div>
+    <div class="ct">Week-by-week breakdown — Sun to Sat EOD</div>
+    <table class="wt">
+      <thead>
+        <tr>
+          <th>Sat EOD</th><th>Sun start</th>
+          <th>Trial</th><th>Pack-4</th><th>Pack-12/24</th><th>Intern</th><th>Other</th>
+          <th># Tx</th><th>Total</th>
+        </tr>
+      </thead>
+      <tbody id="wkTbody"></tbody>
+    </table>
+    <p class="note">Green = best week. Red = under $500. Bold Pack-12 = high-value billing week. ★ = current partial week (through Fri 17 Apr).</p>
   </div>
 </div>
 
-<!-- FUNNEL + RIGHT -->
-<div class="sec g6535">
+<!-- REVENUE STRUCTURE -->
+<div class="section">
+  <div class="sl">Revenue structure</div>
+  <div class="two">
+    <div class="card">
+      <div class="ct">Revenue split by tier — full period</div>
+      <div class="cw h200"><canvas id="pieChart" role="img" aria-label="Donut chart of revenue by tier"></canvas></div>
+      <div class="leg" style="margin-top:10px;margin-bottom:0">
+        <span><span class="dot" style="background:#85B7EB"></span>Trial 44.5%</span>
+        <span><span class="dot" style="background:#97C459"></span>Pack-4 35.1%</span>
+        <span><span class="dot" style="background:#ED93B1"></span>Pack-12/24 10.5%</span>
+        <span><span class="dot" style="background:#FAC775"></span>Intern 5.7%</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ct">Avg revenue per transaction</div>
+      <div class="cw h200"><canvas id="aovChart" role="img" aria-label="Avg transaction value by tier"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- FUNNEL + TRACKING -->
+<div class="section">
+  <div class="sl">The funnel problem</div>
+  <div class="two">
+    <div class="card">
+      <div class="ct">Volume vs revenue — the inversion</div>
+      <div class="frow"><div class="fl">Trial</div><div class="fw"><div class="fb" style="width:100%;background:#DBEAFE;color:#185FA5">707 transactions</div></div><div class="fv">$9,099</div></div>
+      <div class="frow"><div class="fl">Intern</div><div class="fw"><div class="fb" style="width:26%;background:#FEF9EC;color:#92400E">184</div></div><div class="fv" style="color:var(--teal)">$1,148 ✓</div></div>
+      <div class="frow"><div class="fl">Pack-4</div><div class="fw"><div class="fb" style="width:10.9%;background:#D1FAE5;color:#065F46">77</div></div><div class="fv">$7,171</div></div>
+      <div class="frow"><div class="fl">Pack-12/24</div><div class="fw"><div class="fb" style="width:0.85%;background:#FCE7F3;color:#9D174D">6</div></div><div class="fv">$2,148</div></div>
+      <div class="at" style="margin-top:12px"><strong>Intern = 100% margin.</strong> Zero therapist cost, zero overhead. Every $2.86–$65 Intern sale is pure profit. Scale volume aggressively — more interns, more visibility, lower friction to book.</div>
+      <p class="note" style="margin-top:8px">Bar = transaction count. Value = revenue. 6 Pack-12 sales nearly match all Intern revenue combined — but Intern is all profit.</p>
+    </div>
+    <div class="card">
+      <div class="ct">Subscriber tracking gap</div>
+      <div style="margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px"><span style="color:var(--text2)">Transactions with Sub ID</span><span style="font-weight:700">230 / 991</span></div>
+        <div class="pg"><div class="pb" style="width:23.2%;background:var(--blue)"></div></div>
+      </div>
+      <div style="margin-bottom:14px">
+        <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px"><span style="color:var(--text2)">Anonymous / untracked</span><span style="font-weight:700;color:var(--red)">761 / 991</span></div>
+        <div class="pg"><div class="pb" style="width:76.8%;background:var(--red)"></div></div>
+      </div>
+      <div class="ar">
+        <strong>76.8% of all transactions have no Sub ID.</strong> You cannot run lifecycle emails, upsell sequences, or churn prediction on 3 out of 4 buyers. This is your single biggest operational blindspot.
+      </div>
+      <div style="margin-top:12px">
+        <div class="tr-row"><span style="color:var(--text2)">Subs with repeat purchases</span><span style="font-weight:700;color:var(--green)">32 / 83</span></div>
+        <div class="tr-row"><span style="color:var(--text2)">Tracked trial → pack conversion</span><span style="font-weight:700;color:var(--red)">~0%</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DIAGNOSIS -->
+<div class="section">
+  <div class="sl">Critical diagnosis — what broke and why</div>
   <div class="card">
-    <div class="ct">User Conversion Funnel</div>
-    <div class="cs">From acquisition to active subscriber · 1,444 total users · Oct 2025 – Mar 16, 2026</div>
-
-    <div class="frow">
-      <div class="fmeta"><span class="fn">All acquired users</span><span class="fv" style="color:var(--text)">1,444 · 100%</span></div>
-      <div class="ftrk"><div class="ffil" style="width:100%;background:var(--green);color:#fff">1,444</div></div>
-    </div>
-    <div class="frow">
-      <div class="fmeta"><span class="fn">Never paid anything</span><span class="fv" style="color:var(--t2)">929 · 64.3%</span></div>
-      <div class="ftrk"><div class="ffil" style="width:64.3%;background:var(--s2);color:var(--t2)">929 — free trial only</div></div>
-    </div>
-
-    <div class="fdiv"></div>
-    <div class="fsub">// of 515 users who made any payment (35.7% of total):</div>
-
-    <div class="frow">
-      <div class="fmeta"><span class="fn">Paid for trial only — never returned</span><span class="fv" style="color:var(--red)">462 · 89.7% of payers</span></div>
-      <div class="ftrk"><div class="ffil" style="width:100%;background:var(--rbg);color:var(--red);border:1px solid var(--rbd)">462 — one transaction, then gone</div></div>
-    </div>
-    <div class="frow">
-      <div class="fmeta"><span class="fn">Bought a session pack</span><span class="fv" style="color:var(--blue)">38 · 7.4% of payers</span></div>
-      <div class="ftrk"><div class="ffil" style="width:7.4%;background:var(--blue);color:#fff">38</div></div>
-    </div>
-    <div class="frow">
-      <div class="fmeta"><span class="fn">Active subscriber today</span><span class="fv" style="color:var(--red)">15 · 2.9% of payers</span></div>
-      <div class="ftrk"><div class="ffil" style="width:2.9%;background:var(--red);color:#fff"></div></div>
-    </div>
-
-    <p class="fnote"><strong>89.7%</strong> of every paying user we have ever had made one transaction — a trial — and never came back. Acquisition is working. The post-trial conversion layer does not exist yet.</p>
+    <ul class="il">
+      <li><span class="tag tr">Cash killer</span><strong>Pack-12/24 was essentially dead Nov–Mar (5 months).</strong> Zero Pack-12 revenue in Nov, Dec, Feb, Mar. The only sale was $156 in Jan. It exploded in Apr to $1,826 — driven by the $695 and $677 Pack-12 plan starts on Apr 12–14. This product sells when someone pitches it and dies when no one does. It cannot live on memory.</li>
+      <li><span class="tag tr">Funnel broken</span><strong>Zero tracked trial-to-pack conversion.</strong> 707 trial transactions, 77 Pack-4 transactions — but of identified subscribers, none converted from trial to pack within the same sub ID. Every $5–$73 trial that doesn't convert to a $58–$252 pack is a structural revenue failure.</li>
+      <li><span class="tag tr">Missed upsell</span><strong>Sub 2754 — the clearest example of a broken upsell funnel.</strong> Paid $69/week for "Trial 1 Session" for 9 consecutive weeks — $622 total. Pack-12 at $695 one-time would have been cheaper for them and better for you. You got less money and gave them a worse client experience.</li>
+      <li><span class="tag ta">Investigate</span><strong>Jan–Feb dip then Mar–Apr recovery: do you know why both happened?</strong> Revenue dropped to $2,322 in Jan and $2,940 in Feb, then Pack-4 doubled in Mar ($1,763) and Apr is now your best month. Something changed in March. If you can't explain the cause, you can't replicate the recovery — and you'll repeat the dip.</li>
+      <li><span class="tag tt">Scale this</span><strong>Intern is growing and it's 100% margin — triple it.</strong> From near-zero in Nov to $384 in Apr. No therapist cost, pure profit. Add more intern counsellors, give them dedicated visibility, reduce friction to book. Target: 3× Intern volume by July = ~$1,200/month of pure bottom line.</li>
+      <li><span class="tag tr">Watch weekly</span><strong>Week of 04 Apr ($550 total) was your worst week since Jan.</strong> Without a structured Saturday EOD review you'd have only noticed this in the monthly rollup, weeks later. The weekly chart makes these drops visible immediately so you can course-correct in days, not weeks.</li>
+    </ul>
   </div>
+</div>
 
-  <div style="display:flex;flex-direction:column;gap:14px">
-    <div class="card">
-      <div class="ct">Revenue Mix</div>
-      <div class="cs">Trials vs subscriptions · Oct '25 – Mar '26 · $19,301 total</div>
-      <div style="position:relative;height:150px"><canvas id="donutChart"></canvas></div>
+<!-- ACTIONS -->
+<div class="section">
+  <div class="sl">10x battle plan — prioritized</div>
+  <div class="ag2">
+    <div class="ac urg"><div class="act">Fix first — this week</div><h4>Kill anonymous tracking</h4><p>Every purchase must capture Sub ID. Build a post-purchase hook tying buyer to account. Without this, lifecycle emails and upsell sequences are impossible for 3 in 4 buyers.</p></div>
+    <div class="ac urg"><div class="act">Fix first — this week</div><h4>Sub 2754-type audit — instant cash</h4><p>Pull every subscriber with 3+ trial payments and no pack upgrade. These are your warmest leads. Email or call them today with a Pack-4 or Pack-12 offer. This is money already in the building.</p></div>
+    <div class="ac grw"><div class="act">Growth engine — month 1</div><h4>Pack-12 must sell systematically</h4><p>$1,826 in Apr's first 17 days proves the product works. Build an automated day-3 post-trial "your therapist recommends" email. Make Pack-12 the default upsell, not the exception. Target: 4+ Pack-12 plan starts per week.</p></div>
+    <div class="ac grw"><div class="act">Growth engine — month 1</div><h4>72-hour upsell window post-trial</h4><p>Intent peaks 48–72hr after a first session. Every trial user needs a sequenced offer — Pack-4 with a 15% early-commit discount, Pack-12 framed as a full course. Conversion target: 12%. That's 85+ pack sales/month from existing trial volume.</p></div>
+    <div class="ac tcl"><div class="act">Scale now — month 1</div><h4>3× Intern volume = 3× free profit</h4><p>Intern = 100% margin. $384 in Apr already. Add interns, give them a dedicated landing page, include them in every onboarding email. Target: $1,200+/month of pure bottom line by July.</p></div>
+    <div class="ac"><div class="act">Product — month 2</div><h4>Couples therapy as a premium vertical</h4><p>Only 2 couple Pack sales in 6 months. Couples have the highest willingness-to-pay globally — two motivated buyers. The $309 Couple Pack-24 needs its own page and acquisition funnel.</p></div>
+    <div class="ac grw"><div class="act">Ops — ongoing</div><h4>Saturday war room ritual — formalize it</h4><p>You review Saturdays already. Now make it structured: weekly revenue vs prior week vs 4-week avg; Pack-12 plan starts; trial-to-pack conversion; Intern session count. A 5-line written summary. Catch Apr-4-type drops before they compound.</p></div>
+    <div class="ac"><div class="act">Ops — month 2</div><h4>Crack the March mystery</h4><p>Pack-4 doubled in March. Something triggered it. A campaign? A therapist pitching harder? Pricing? You must know the cause before you can replicate it. This is your highest-leverage unknown right now.</p></div>
+  </div>
+</div>
+
+<!-- THE MATH -->
+<div class="section" style="margin-bottom:0">
+  <div class="sl">The math — what 10x looks like</div>
+  <div class="card">
+    <div class="math">
+      <div class="mi"><div class="ml">Best month to date</div><div class="mv">$4,095</div><p>Apr 2026 (17 days in). Driven by two Pack-12 plan starts totalling $1,826.</p></div>
+      <div class="mi"><div class="ml">Previous stated peak</div><div class="mv" style="color:var(--amber)">$10–12k</div><p>Currently running at 34–40% of that level month-on-month.</p></div>
+      <div class="mi"><div class="ml">10x target</div><div class="mv" style="color:var(--green)">$40,950</div><p>30 Pack-12 starts + 100 Pack-4 starts + scaled Intern + fixed trial funnel.</p></div>
     </div>
-    <div class="card">
-      <div class="ct">Subscription Health</div>
-      <div class="cs">63 real subs ever created · status Mar 16, 2026</div>
-      <div class="srow"><span class="sl">Active</span><span class="sv g">15 &nbsp;(23.8%)</span></div>
-      <div class="srow"><span class="sl">Canceled by user</span><span class="sv r">34 &nbsp;(54.0%)</span></div>
-      <div class="srow"><span class="sl">Expired — did not renew</span><span class="sv r">9 &nbsp;&nbsp;(14.3%)</span></div>
-      <div class="srow"><span class="sl">Paused / halted</span><span class="sv a">5 &nbsp;&nbsp;(7.9%)</span></div>
-      <div class="srow" style="padding-top:11px;margin-top:3px;border-top:1px solid var(--bd2)">
-        <span class="sl" style="font-weight:500;color:var(--text)">Effective churn rate</span>
-        <span class="sv r" style="font-size:16px">76.2%</span>
-      </div>
-      <p class="snote">Churned subscribers averaged $131/mo vs $61 for actives — highest-value users are churning fastest.</p>
+    <div class="div"></div>
+    <div class="ag" style="font-size:13px;line-height:1.75">
+      <strong>The 90-day path to $20–25k/month without extra acquisition spend:</strong><br>
+      Current trial→pack conversion: ~0%. Industry benchmark: 12–18%.
+      Hitting <strong>10% on existing ~700 monthly trial transactions</strong> = 70 Pack-4 sales × ~$93 avg = <strong>+$6,510/mo</strong>.
+      Add <strong>20 Pack-12 plan starts/month</strong> × ~$360 avg = <strong>+$7,200/mo</strong>.
+      <strong>3× Intern volume</strong> at 100% margin = <strong>+$800/mo free</strong>.
+      Fix tracking so upsell sequences can actually run.
+      Combined: <strong>$20–25k/month is achievable in 90 days.</strong> The demand is already there. The product already works. The only missing layer is systematic monetization.
     </div>
   </div>
 </div>
 
-<!-- INSIGHTS -->
-<div class="sec">
-  <div class="sec-hd"><h2 class="sec-title">Key Findings</h2></div>
-  <div class="g3">
-    <div class="icard">
-      <span class="itag r">Core Problem</span>
-      <div class="inum r">89.7%</div>
-      <div class="ititle">Nearly all paying users stop at trial and never come back</div>
-      <div class="ibody">462 of 515 paying users transacted exactly once — a trial purchase. There is no post-trial moment that converts a user into a subscriber. The acquisition is working; the conversion layer doesn't exist yet.</div>
-    </div>
-    <div class="icard">
-      <span class="itag r">Revenue Structure</span>
-      <div class="inum r">48.4%</div>
-      <div class="ititle">Trials and subscriptions are nearly equal — but subscriptions aren't sticking</div>
-      <div class="ibody">~$9,300 from trials, ~$9,956 from subscriptions — almost a 50/50 split, which is actually a healthy starting point. The problem isn't the mix. It's that subscriptions churn at 76.2% before they compound, so every month the subscription base resets rather than grows.</div>
-    </div>
-    <div class="icard">
-      <span class="itag r">Retention</span>
-      <div class="inum r">76.2%</div>
-      <div class="ititle">Churn rate makes $30k MRR unreachable at current pace</div>
-      <div class="ibody">At 76.2% churn, we'd need to acquire 130+ new subscribers every single month just to hold flat at 30 active. Churn must come below 30% before we scale acquisition behind it.</div>
-    </div>
-    <div class="icard">
-      <span class="itag a">Trend</span>
-      <div class="inum a">-47.8%</div>
-      <div class="ititle">Revenue fell 47.8% from October to February across complete months</div>
-      <div class="ibody">Oct $5,095 → Feb $2,659. The Jan → Feb recovery of +21.4% shows the business responds to acquisition spend — but without subscriptions compounding, every month restarts from zero.</div>
-    </div>
-    <div class="icard">
-      <span class="itag a">Attribution</span>
-      <div class="inum a">88.4%</div>
-      <div class="ititle">Almost no ad spend has attribution — ROAS is invisible</div>
-      <div class="ibody">88.4% of all orders carry no UTM source tag. We cannot identify which campaign, channel, or creative drives paying users versus free-trial takers. We are optimizing ad spend for clicks, not conversions.</div>
-    </div>
-    <div class="icard">
-      <span class="itag g">Opportunity</span>
-      <div class="inum g">929</div>
-      <div class="ititle">Free-trial pool is a near-zero-CAC re-engagement base</div>
-      <div class="ibody">929 users took a free trial and never paid anything. A 3-email post-trial sequence (Day 1 / Day 4 / Day 10) at 10% conversion alone is 93 new paying users — from an audience we already own, at essentially no acquisition cost.</div>
-    </div>
-  </div>
 </div>
-
-<!-- ROADMAP -->
-<div class="sec">
-  <div class="sec-hd">
-    <h2 class="sec-title">Path to $30,000 MRR</h2>
-    <span class="sec-note">B2C only · 9-month plan · ~490 active subscribers required at current avg $61</span>
-  </div>
-  <div class="rmap">
-    <div class="rmhd">
-      <span>Phase</span><span>Initiative</span><span style="text-align:right">MRR Target</span>
-    </div>
-    <div class="rmrow">
-      <div><div class="rmtag p1">Month 1–2<br>Fix the floor</div></div>
-      <div>
-        <div class="rmtitle">The first-timer discount exists — make it reach people</div>
-        <div class="rmbody">The discount is live but there is no email trigger surfacing it after a trial ends — so almost no one sees it at the right moment. The immediate work: set up a 3-email post-trial drip (Day 1 / Day 4 / Day 10) that shows the discount to every trial user. This is the single missing piece between the offer existing and it actually converting. In parallel: add UTM parameters to every ad link so we know which campaigns drive paying users vs free-trial takers. Add a pause option in the cancellation flow so users who would cancel can hold instead.</div>
-      </div>
-      <div class="rmr">
-        <div class="rmamt">$2,500</div>
-        <div class="rmsub">~40 active subs</div>
-        <div class="pbg"><div class="pbf" style="width:8%"></div></div>
-      </div>
-    </div>
-    <div class="rmrow">
-      <div><div class="rmtag p2">Month 3–4<br>Build the engine</div></div>
-      <div>
-        <div class="rmtitle">The preference form exists — find out if it's actually reducing churn</div>
-        <div class="rmbody">We have a preference form and provider allocation in place, which is a strong foundation. But 76.2% churn suggests the match isn't sticking. The first question to answer: are users who complete the preference form churning at a lower rate than those who don't? If yes — make completing it mandatory before any booking. If churn is similar either way, the allocation logic itself needs to improve, not the form. Beyond that: A/B test plan pricing ($49 vs $69 vs $89/month), introduce 3-month and 6-month plans at a 15% discount to lock in LTV upfront, and launch couples-specific ad creatives with a dedicated landing page — observed couples LTV is 4–5× the individual average.</div>
-      </div>
-      <div class="rmr">
-        <div class="rmamt">$8,000</div>
-        <div class="rmsub">~130 active subs</div>
-        <div class="pbg"><div class="pbf" style="width:27%"></div></div>
-      </div>
-    </div>
-    <div class="rmrow">
-      <div><div class="rmtag p3">Month 5–6<br>Scale smart</div></div>
-      <div>
-        <div class="rmtitle">Let attribution data drive every ad rupee</div>
-        <div class="rmbody">By month 5 we have 3+ months of UTM data. Identify which campaigns drive trial → subscription conversion — not just trial volume — and double down on those. Cut campaigns that drive only free-trial takers. Target MENA and Southeast Asia more deliberately — Egypt, Saudi Arabia, and Indonesia have shown organic traction at above-average order values.</div>
-      </div>
-      <div class="rmr">
-        <div class="rmamt">$18,000</div>
-        <div class="rmsub">~295 active subs</div>
-        <div class="pbg"><div class="pbf" style="width:60%"></div></div>
-      </div>
-    </div>
-    <div class="rmrow">
-      <div><div class="rmtag p4">Month 7–9<br>Compound</div></div>
-      <div>
-        <div class="rmtitle">Re-engage, retain, and close the gap</div>
-        <div class="rmbody">Run a direct win-back campaign for all 48 churned subscribers — warm audiences convert at 2–3× the cost of cold acquisition. Reach out to the 38 session-pack buyers personally with a subscription offer — they've already demonstrated willingness to pay beyond a trial. Introduce annual plans to lock in LTV and reduce monthly churn pressure. With trial → subscription CVR improved to 15–20%, the unit economics support meaningful ad scale to reach $30k.</div>
-      </div>
-      <div class="rmr">
-        <div class="rmamt">$30,000</div>
-        <div class="rmsub">~490 active subs</div>
-        <div class="pbg"><div class="pbf" style="width:100%"></div></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- SUMMARY -->
-<div class="summary">
-  <div class="sum-l">Summary</div>
-  <div class="sum-d"></div>
-  <p class="sum-t">We generated <strong>$19,301 across six months</strong> with a peak of <strong>$5,095 in October</strong>. The core problem is what happens after a user arrives: <strong>89.7% of every paying user we have ever had made one transaction — a trial — and never came back.</strong> Subscription churn sits at 76.2%, meaning the moment we do convert someone, we lose them at nearly the same rate. The path to $30k MRR requires roughly <strong>490 active subscribers</strong>. We have 15 today. This is not a marketing problem — it is a post-trial conversion and retention problem. Fix those two things first, instrument attribution second, then scale spend with confidence.</p>
-</div>
-
-</div>
-
 <script>
-Chart.defaults.font.family = "'DM Sans', sans-serif";
-Chart.defaults.color = '#605c54';
-Chart.defaults.borderColor = '#e4e0d8';
+const C={trial:'#85B7EB',pack4:'#97C459',pack12:'#ED93B1',intern:'#FAC775',other:'#B4B2A9',
+  tot:'#378ADD',p4l:'#639922',p12l:'#D4537E',intl:'#BA7517'};
+const gc='rgba(0,0,0,0.06)';
+Chart.defaults.font.family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif";
+Chart.defaults.font.size=11;Chart.defaults.color='#9a9890';
 
-const tip = {
-  backgroundColor:'#fff', titleColor:'#1a1916', bodyColor:'#605c54',
-  borderColor:'#e4e0d8', borderWidth:1, padding:12, cornerRadius:8, boxPadding:4,
-  titleFont:{family:"'DM Mono'",size:11}, bodyFont:{family:"'DM Sans'",size:12}
-};
+// MONTHLY DATA
+const months=['Nov','Dec','Jan','Feb','Mar','Apr*'];
+const mT=[2608,2277,1272,1279,1601,702];
+const mP4=[1169,1100,712,1385,1763,1020];
+const mP12=[0,0,156,0,0,1826];
+const mIn=[0,194,100,246,224,384];
+const mOt=[20,8,81,30,135,163];
 
-// Revenue chart with MoM annotations
-const momData = [5095,4467,3314,2191,2659,1574];
-const momLabels = ["Oct '25","Nov '25","Dec '25","Jan '26","Feb '26","Mar '26*"];
-const momChanges = [null,-12.3,-25.8,-33.9,+21.4,null];
-const momColors = [
-  'rgba(30,104,64,.8)',
-  'rgba(30,104,64,.7)',
-  'rgba(30,104,64,.6)',
-  'rgba(30,104,64,.5)',
-  'rgba(30,104,64,.8)',
-  'rgba(30,104,64,.35)'
+// WEEKLY DATA — 25 weeks, Sun-Sat (Plan Start date), verified
+const W=[
+//[satLabel, sunLabel, trial, pack4, pack12, intern, other, tx]
+['01 Nov','26 Oct', 57, 52,   0,   0,  0,  3],
+['08 Nov','02 Nov',796,547,   0,   0,  0, 47],
+['15 Nov','09 Nov',590,210,   0,   0, 20, 39],
+['22 Nov','16 Nov',640,249,   0,   0,  0, 34],
+['29 Nov','23 Nov',498,112,   0,   0,  0, 33],
+['06 Dec','30 Nov',470,947,   0,  13,  8, 35],
+['13 Dec','07 Dec',442, 41,   0,  60,  0, 35],
+['20 Dec','14 Dec',631,  0,   0,  50,  0, 35],
+['27 Dec','21 Dec',470,112,   0,  56,  0, 39],
+['03 Jan','28 Dec',454,299,   0,  31,  0, 43],
+['10 Jan','04 Jan',443,238, 156,  19,  7, 43],
+['17 Jan','11 Jan',231,117,   0,  13, 35, 37],
+['24 Jan','18 Jan',133, 59,   0,  39, 14, 31],
+['31 Jan','25 Jan',303,  0,   0,  14, 24, 34],
+['07 Feb','01 Feb',586,252,   0,  25,  0, 57],
+['14 Feb','08 Feb',197,588,   0, 115,  5, 51],
+['21 Feb','15 Feb',225,  0,   0,  21,  0, 36],
+['28 Feb','22 Feb',271,545,   0,  85, 25, 39],
+['07 Mar','01 Mar',351,571,   0,  19, 33, 49],
+['14 Mar','08 Mar',326,237,   0,  74, 38, 47],
+['21 Mar','15 Mar',372,419,   0,  48, 64, 44],
+['28 Mar','22 Mar',415,479,   0,  71,  0, 44],
+['04 Apr','29 Mar',309, 58,   0,  31,151, 40],
+['11 Apr','05 Apr',364,427, 300, 182, 10, 52],
+['18 Apr','12 Apr',165,593,1526, 182,  2, 44],// ★ partial (through Fri 17 Apr)
 ];
+const wL=W.map(w=>w[0]);
+const wT=W.map(w=>w[2]),wP4=W.map(w=>w[3]),wP12=W.map(w=>w[4]);
+const wIn=W.map(w=>w[5]),wOt=W.map(w=>w[6]);
+const wTot=W.map((_,i)=>wT[i]+wP4[i]+wP12[i]+wIn[i]+wOt[i]);
 
-const annotPlugin = {
-  id:'annot',
-  afterDatasetsDraw(chart){
-    const {ctx,scales:{x,y}} = chart;
-    ctx.save();
-    momChanges.forEach((c,i)=>{
-      if(c===null) return;
-      const xp = x.getPixelForValue(i);
-      const yp = y.getPixelForValue(momData[i]) - 26;
-      const lbl = (c>0?'▲ +':'▼ ') + Math.abs(c) + '%';
-      ctx.font = "500 10px 'DM Mono'";
-      ctx.fillStyle = c>0 ? '#1e6840' : '#b02a2a';
-      ctx.textAlign = 'center';
-      ctx.fillText(lbl, xp, yp);
-    });
-    ctx.restore();
-  }
-};
-
-new Chart(document.getElementById('momChart'),{
-  type:'bar', plugins:[annotPlugin],
-  data:{
-    labels:momLabels,
-    datasets:[{
-      data:momData,
-      backgroundColor:momColors,
-      borderColor:momColors.map(c=>c.replace(/[\d.]+\)$/,'1)')),
-      borderWidth:1, borderRadius:7
-    }]
-  },
-  options:{
-    responsive:true, maintainAspectRatio:false,
-    layout:{padding:{top:36}},
-    plugins:{legend:{display:false},tooltip:{...tip,callbacks:{label:ctx=>' $'+ctx.raw.toLocaleString()}}},
-    scales:{
-      x:{ticks:{font:{size:12}},grid:{display:false}},
-      y:{beginAtZero:true,ticks:{font:{size:11},callback:v=>'$'+v.toLocaleString()},grid:{color:'#eeebe4'}}
-    }
-  }
+// 1. Monthly stacked bar
+new Chart(document.getElementById('monthlyChart'),{type:'bar',
+  data:{labels:months,datasets:[
+    {label:'Trial',data:mT,backgroundColor:C.trial,stack:'s'},
+    {label:'Pack-4',data:mP4,backgroundColor:C.pack4,stack:'s'},
+    {label:'Pack-12/24',data:mP12,backgroundColor:C.pack12,stack:'s'},
+    {label:'Intern',data:mIn,backgroundColor:C.intern,stack:'s'},
+    {label:'Other',data:mOt,backgroundColor:C.other,stack:'s'}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.dataset.label}: $${c.parsed.y.toLocaleString('en-US',{maximumFractionDigits:0})}`}}},
+    scales:{x:{grid:{display:false},ticks:{maxRotation:0}},y:{grid:{color:gc},ticks:{callback:v=>'$'+v.toLocaleString()}}}}
 });
 
-// Users chart
-new Chart(document.getElementById('usersChart'),{
-  type:'bar',
-  data:{
-    labels:["Oct '25","Nov '25","Dec '25","Jan '26","Feb '26","Mar '26*"],
-    datasets:[
-      {label:'Paying users',data:[108,87,76,128,112,79],backgroundColor:'rgba(30,104,64,.8)',borderColor:'#1e6840',borderWidth:1,borderRadius:5},
-      {label:'Free trial only',data:[133,173,67,132,289,145],backgroundColor:'rgba(212,208,200,.6)',borderColor:'rgba(180,176,168,.8)',borderWidth:1,borderRadius:5}
-    ]
-  },
-  options:{
-    responsive:true, maintainAspectRatio:false,
-    plugins:{legend:{display:false},tooltip:{...tip,mode:'index',callbacks:{label:ctx=>' '+ctx.dataset.label+': '+ctx.raw}}},
-    scales:{
-      x:{ticks:{font:{size:12}},grid:{display:false}},
-      y:{beginAtZero:true,ticks:{font:{size:11}},grid:{color:'#eeebe4'}}
-    }
-  }
+// 2. Weekly stacked bar
+new Chart(document.getElementById('weeklyBarChart'),{type:'bar',
+  data:{labels:wL,datasets:[
+    {label:'Trial',data:wT,backgroundColor:C.trial,stack:'s'},
+    {label:'Pack-4',data:wP4,backgroundColor:C.pack4,stack:'s'},
+    {label:'Pack-12/24',data:wP12,backgroundColor:C.pack12,stack:'s'},
+    {label:'Intern',data:wIn,backgroundColor:C.intern,stack:'s'},
+    {label:'Other',data:wOt,backgroundColor:C.other,stack:'s'}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{
+      label:c=>` ${c.dataset.label}: $${c.parsed.y.toFixed(0)}`,
+      footer:items=>' Total: $'+items.reduce((s,i)=>s+i.parsed.y,0).toFixed(0)
+    }}},
+    scales:{x:{grid:{display:false},ticks:{maxRotation:45,font:{size:10}}},y:{grid:{color:gc},ticks:{callback:v=>'$'+v}}}}
 });
 
-// WoW
-new Chart(document.getElementById('wowChart'),{
-  type:'line',
-  data:{
-    labels:['Oct W2','Oct W3','Oct W4','Oct W5','Nov W2','Nov W3','Nov W4','Dec W2','Dec W3','Dec W4','Jan W1','Jan W2','Jan W3','Jan W4','Feb W1','Feb W2','Feb W3','Feb W4','Mar W1','Mar W2','Mar W3'],
-    datasets:[{
-      data:[258,1363,1124,1161,962,549,599,1094,628,518,1112,482,403,173,348,761,689,263,756,1056,599],
-      borderColor:'#1e6840',
-      backgroundColor:ctx=>{
-        const {ctx:c,chartArea}=ctx.chart;
-        if(!chartArea) return 'transparent';
-        const g=c.createLinearGradient(0,chartArea.top,0,chartArea.bottom);
-        g.addColorStop(0,'rgba(30,104,64,.1)');
-        g.addColorStop(1,'rgba(30,104,64,0)');
-        return g;
-      },
-      pointRadius:ctx=>ctx.raw<300?5:3,
-      pointBackgroundColor:ctx=>ctx.raw<300?'#b02a2a':'#1e6840',
-      pointBorderColor:'#fff', pointBorderWidth:2,
-      tension:0.4, fill:true, borderWidth:2
-    }]
-  },
-  options:{
-    responsive:true, maintainAspectRatio:false,
-    plugins:{legend:{display:false},tooltip:{...tip,callbacks:{label:ctx=>' $'+ctx.raw.toLocaleString()}}},
-    scales:{
-      x:{ticks:{font:{size:10},maxRotation:45,autoSkip:false},grid:{display:false}},
-      y:{beginAtZero:true,ticks:{font:{size:10},callback:v=>'$'+v.toLocaleString()},grid:{color:'#eeebe4'}}
-    }
-  }
+// 3. Weekly line
+new Chart(document.getElementById('weeklyLineChart'),{type:'line',
+  data:{labels:wL,datasets:[
+    {label:'Total',data:wTot,borderColor:C.tot,backgroundColor:'rgba(55,138,221,0.07)',borderWidth:2.5,pointRadius:3,pointBackgroundColor:C.tot,fill:true,tension:0.3,order:0},
+    {label:'Pack-4',data:wP4,borderColor:C.p4l,backgroundColor:'transparent',borderWidth:1.5,pointRadius:2.5,pointBackgroundColor:C.p4l,fill:false,tension:0.3,borderDash:[5,3],order:1},
+    {label:'Pack-12/24',data:wP12,borderColor:C.p12l,backgroundColor:'transparent',borderWidth:1.5,pointRadius:2.5,pointBackgroundColor:C.p12l,fill:false,tension:0.3,borderDash:[2,2],order:2},
+    {label:'Intern',data:wIn,borderColor:C.intl,backgroundColor:'transparent',borderWidth:1.5,pointRadius:2.5,pointBackgroundColor:C.intl,fill:false,tension:0.3,borderDash:[6,3],order:3}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.dataset.label}: $${c.parsed.y.toFixed(0)}`}}},
+    scales:{x:{grid:{display:false},ticks:{maxRotation:45,font:{size:10}}},y:{grid:{color:gc},ticks:{callback:v=>'$'+v}}}}
 });
 
-// Donut
-new Chart(document.getElementById('donutChart'),{
-  type:'doughnut',
-  data:{
-    labels:['Trial purchases (48.4%)','Subscriptions (51.6%)'],
-    datasets:[{
-      data:[9345,9956],
-      backgroundColor:['#b02a2a','#1e6840'],
-      borderWidth:3, borderColor:'#fff', hoverBorderColor:'#f6f4f0'
-    }]
-  },
-  options:{
-    responsive:true, maintainAspectRatio:false, cutout:'65%',
-    plugins:{
-      legend:{position:'right',labels:{font:{size:10},padding:10,boxWidth:10,color:'#605c54'}},
-      tooltip:{...tip,callbacks:{label:ctx=>' $'+ctx.raw.toLocaleString()}}
-    }
-  }
+// 4. Donut
+new Chart(document.getElementById('pieChart'),{type:'doughnut',
+  data:{labels:['Trial','Pack-4','Pack-12/24','Intern','Other'],
+    datasets:[{data:[9099,7171,2148,1148,890],backgroundColor:[C.trial,C.pack4,C.pack12,C.intern,C.other],borderWidth:0}]},
+  options:{responsive:true,maintainAspectRatio:false,cutout:'60%',
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` $${c.parsed.toLocaleString('en-US',{maximumFractionDigits:0})} (${(c.parsed/20456*100).toFixed(1)}%)`}}}}
 });
+
+// 5. AOV bar
+new Chart(document.getElementById('aovChart'),{type:'bar',
+  data:{labels:['Pack-12/24','Pack-4','Other','Trial','Intern'],
+    datasets:[{data:[358,93,26,13,6],backgroundColor:[C.pack12,C.pack4,C.other,C.trial,C.intern],borderRadius:4}]},
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` avg $${c.parsed.x}`}}},
+    scales:{x:{grid:{color:gc},ticks:{callback:v=>'$'+v}},y:{grid:{display:false}}}}
+});
+
+// 6. Weekly table
+(function(){
+  const tb=document.getElementById('wkTbody');
+  const maxT=Math.max(...wTot);
+  const JAN_IDX=9;// first Jan week
+  const fmt=n=>n>0?'$'+n.toFixed(0):'—';
+  W.forEach((w,i)=>{
+    if(i===JAN_IDX){
+      const s=document.createElement('tr');s.className='sep';
+      s.innerHTML=`<td colspan="9">── 2026 ─────────────────────────────────────────────────────</td>`;
+      tb.appendChild(s);
+    }
+    const tot=wTot[i];
+    const isMax=tot===maxT,isLow=tot<500,isPartial=i===W.length-1;
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
+      <td>Sat ${w[0]}${isPartial?' ★':''}</td>
+      <td>Sun ${w[1]}</td>
+      <td>${fmt(w[2])}</td>
+      <td>${fmt(w[3])}</td>
+      <td>${w[4]>0?'<strong>$'+w[4].toFixed(0)+'</strong>':'—'}</td>
+      <td>${fmt(w[5])}</td>
+      <td>${fmt(w[6])}</td>
+      <td style="color:var(--text3)">${w[7]}</td>
+      <td class="tc ${isMax?'hi':''} ${isLow&&!isMax?'lo':''}">$${tot.toFixed(0)}</td>`;
+    tb.appendChild(tr);
+  });
+})();
 </script>
 </body>
 </html>
